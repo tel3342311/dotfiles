@@ -30,6 +30,8 @@
           {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
+            # Preserve existing configs on first activation; never force-overwrite them.
+            home-manager.backupFileExtension = "before-home-manager";
             home-manager.extraSpecialArgs = { inherit user; };
             home-manager.users.${user} = import ./home.nix;
           }

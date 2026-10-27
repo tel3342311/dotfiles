@@ -66,6 +66,12 @@ Change the host label or CPU architecture if needed, and read the Homebrew clean
 
 After that, `darwin-rebuild` exists and you're on the normal workflow below.
 
+Home Manager moves conflicting existing files and directories to the same path
+with `.before-home-manager` appended before installing its links (for example,
+`~/.zshrc.before-home-manager`). Review these backups for local settings you want
+to keep. If a backup already exists, activation stops rather than overwriting it;
+move that backup to another safe location before retrying.
+
 ### Validate without applying
 
 Once Nix is installed (`bootstrap.sh` step 1 handles that), you can check that the config builds without touching your system - handy when you have edited something:
