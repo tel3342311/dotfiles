@@ -60,7 +60,7 @@ Change the host label or CPU architecture if needed, and read the Homebrew clean
 1. Installs Determinate Nix, if it isn't already installed.
 2. Symlinks this repo to `~/.dotfiles`.
    This has to happen before the first build, because `home.nix` points at config files through `~/.dotfiles`.
-3. Checks the `user` configured in `flake.nix` against your actual macOS username, and offers to fix it for you if they differ.
+3. Checks that your macOS username is in the `users` list in `flake.nix`, and stops with instructions if it isn't.
 4. Runs the first `darwin-rebuild switch`.
    It fetches the `darwin-rebuild` tool from the nix-darwin 26.05 release branch, then applies this repo's locked flake config.
 
@@ -78,10 +78,10 @@ Once Nix is installed (`bootstrap.sh` step 1 handles that), you can check that t
 
 ```sh
 nix flake check --no-build
-nix build .#darwinConfigurations.mac.system --dry-run
+nix build .#darwinConfigurations.$(id -un).system --dry-run
 ```
 
-If you renamed the host label in "Make it yours", substitute your label for `mac` in these commands.
+The flake output is named after your macOS username, so `$(id -un)` picks the right one on any machine.
 
 ## Daily use
 
@@ -99,10 +99,10 @@ No separate build-and-copy step.
 This repo is mine.
 If you clone it, review these before you run `bootstrap.sh`:
 
-- **Username**: run `./bootstrap.sh` (it detects your macOS username and offers to set it) OR change the single `user = "kunchen"` line in `flake.nix`.
-  Everything else (`configuration.nix`, `home.nix`, home directory paths) is threaded from that one variable.
-- **Host label** `"mac"`, in three places: `flake.nix` (the `darwinConfigurations."mac"` name), `rebuild.sh:5` (the `#mac` at the end of the flake reference), and `bootstrap.sh`'s first-switch command (also `#mac`).
-  All three have to match.
+- **Username**: add your macOS username to the `users` list in `flake.nix`.
+  Each name in the list becomes its own flake output, so one clone supports several machines with different usernames.
+  `rebuild.sh` and `bootstrap.sh` pick the output named after the user running them.
+  Everything else (`configuration.nix`, `home.nix`, home directory paths) is threaded from that name.
 - **CPU architecture**, `hostPlatform` in `configuration.nix` (see Prerequisites above).
 
 **Git identity:** this config deliberately does not set your git name or email.
@@ -150,7 +150,7 @@ If you don't use it, just remove it from `brews` in your copy.
 ## Repo tour
 
 - `flake.nix` - the entry point.
-  Wires up nixpkgs, nix-darwin, home-manager, and nix-homebrew, and declares the `mac` machine.
+  Wires up nixpkgs, nix-darwin, home-manager, and nix-homebrew, and declares one machine per username in `users`.
 - `configuration.nix` - system-level config: macOS defaults, Homebrew.
 - `home.nix` - user-level config: shell, packages, prompt, and the symlinks described below.
 - `pkgs/` - tools that are not in Nixpkgs (the npm-only `*-axi` CLIs), built from their GitHub release tags. `pkgs/default.nix` explains how to bump a version.

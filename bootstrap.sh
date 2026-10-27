@@ -20,27 +20,16 @@ echo "==> Step 2: symlink this repo to ~/.dotfiles"
 # has to exist before the first switch or the build will fail to find them.
 ln -sfn "$DIR" ~/.dotfiles
 
-echo "==> Step 3: personalize the configured username"
+echo "==> Step 3: check this username is configured"
 # Do this before any sudo call: sudo resets $USER to root, so whoami has to
 # run as the real interactive user first.
 REAL_USER="$(whoami)"
-FLAKE_USER="$(sed -nE 's/^[[:space:]]*user = "([^"]+)";.*/\1/p' "$DIR/flake.nix" | head -n1)"
-if [ -z "$FLAKE_USER" ]; then
-  echo "    Could not find the single \"user = \" line in flake.nix."
-  echo "    Edit flake.nix yourself before continuing."
-  exit 1
-elif [ "$FLAKE_USER" != "$REAL_USER" ]; then
-  echo "    flake.nix is configured for user \"$FLAKE_USER\", but you are \"$REAL_USER\"."
-  read -r -p "    Rewrite flake.nix's \"user = \" line to \"$REAL_USER\"? [y/N] " REPLY
-  if [ "$REPLY" = "y" ] || [ "$REPLY" = "Y" ]; then
-    sed -i '' -E "s/^([[:space:]]*user = \")[^\"]+(\";.*)/\1${REAL_USER}\2/" "$DIR/flake.nix"
-    echo "    Updated. Review the change with: git diff flake.nix"
-  else
-    echo "    Skipped. Edit the single \"user = \" line in flake.nix yourself before continuing."
-    exit 1
-  fi
+if grep -E '^[[:space:]]*users = \[' "$DIR/flake.nix" | grep -q "\"$REAL_USER\""; then
+  echo "    flake.nix already lists \"$REAL_USER\", nothing to do."
 else
-  echo "    flake.nix already matches \"$REAL_USER\", nothing to do."
+  echo "    \"$REAL_USER\" is not in the \`users\` list in flake.nix."
+  echo "    Add it to that list, then re-run ./bootstrap.sh."
+  exit 1
 fi
 
 echo "==> Step 4: first darwin-rebuild switch (pinned to nix-darwin-26.05)"
@@ -53,10 +42,9 @@ echo "==> Step 4: first darwin-rebuild switch (pinned to nix-darwin-26.05)"
 # freshly installed `nix` would not be found under sudo even though it's
 # on PATH here. Resolve the absolute path first and invoke that instead.
 NIX_BIN="$(command -v nix)"
-# "mac" is the flake host label - if you renamed it, change it in flake.nix
-# and rebuild.sh too.
+# The flake output is named after the username, see `users` in flake.nix.
 sudo -H "$NIX_BIN" run github:nix-darwin/nix-darwin/nix-darwin-26.05#darwin-rebuild -- \
-  switch --flake ~/.dotfiles#mac
+  switch --flake ~/.dotfiles#"$REAL_USER"
 # If this still fails with "nix: command not found", open a new terminal
 # (Determinate adds nix to new shells' PATH) and re-run ./bootstrap.sh.
 
