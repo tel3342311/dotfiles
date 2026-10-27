@@ -17,3 +17,8 @@ result-*
 
 # no-mistakes local validation state - never commit in this public repo
 .no-mistakes/
+
+# herdr runtime state (regenerated per machine)
+home/.config/herdr/herdr.sock.agent
+home/.config/herdr/release-notes.json
+home/.config/herdr/session-snapshots/
