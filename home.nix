@@ -24,10 +24,9 @@ in
     claude-code
     codex
     gh
-    (callPackage ./pkgs/gh-axi.nix { })  # not in nixpkgs, see pkgs/gh-axi.nix
     # the font everything renders in
     nerd-fonts.hack
-  ];
+  ] ++ builtins.attrValues (import ./pkgs { inherit lib callPackage; });  # tools not in nixpkgs
   fonts.fontconfig.enable = true;
   home.sessionVariables.EDITOR = "nvim";
 
