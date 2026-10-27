@@ -38,6 +38,7 @@
       "herdr"
     ];
     casks = [
+      "karabiner-elements"
       "wezterm"
       "claude-code"
     ];
