@@ -28,19 +28,48 @@
   nix-homebrew = {
     enable = true;
     inherit user;
+    autoMigrate = true;  # adopt an existing Homebrew installation
   };
   homebrew = {
     enable = true;
     onActivation.cleanup = "zap";  # remove anything not listed here
     onActivation.autoUpdate = true;
     onActivation.extraFlags = [ "--force" ];
+    # Retain tools not packaged in the pinned Nixpkgs release.
+    taps = [
+      "antoniorodr/memo"
+      "openclaw/tap"
+      "steipete/tap"
+      "yakitrak/yakitrak"
+    ];
     brews = [
       "herdr"
+      "steipete/tap/camsnap"
+      "steipete/tap/gifgrep"
+      "openclaw/tap/goplaces"
+      "steipete/tap/imsg"
+      "antoniorodr/memo/memo"
+      "yakitrak/yakitrak/notesmd-cli" # renamed from obsidian-cli upstream
+      "steipete/tap/ordercli"
+      "steipete/tap/peekaboo"
+      "steipete/tap/remindctl"
+      "steipete/tap/sag"
+      "steipete/tap/songsee"
+      "openclaw/tap/wacli"
     ];
     casks = [
+      "betterdisplay"
+      "db-browser-for-sqlite"
+      "diffmerge"
+      "drawio"
+      "ghostty"
+      "goplaces"
+      "iterm2"
       "karabiner-elements"
+      "kitty"
+      "opensuperwhisper"
+      "orbstack"
       "wezterm"
-      "claude-code"
     ];
   };
 }

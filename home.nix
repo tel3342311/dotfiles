@@ -16,6 +16,13 @@ in
     jq        # json on the command line
     lazygit
     neovim
+    # CLI tools managed here instead of Homebrew.
+    gogcli
+    openhue-cli
+    _1password-cli
+    awscli2
+    claude-code
+    codex
     # the font everything renders in
     nerd-fonts.hack
   ];
@@ -37,6 +44,8 @@ in
       m = "git switch main";
       cc = "claude --dangerously-skip-permissions";
       co = "codex --full-auto";
+      ag = "agy --dangerously-skip-permissions";
+      vi = "nvim";
     };
   };
 

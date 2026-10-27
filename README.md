@@ -124,6 +124,18 @@ That means every time you switch, Homebrew removes any package or cask on your m
 If you already have Homebrew stuff installed that isn't in that list, the first switch will uninstall it.
 Read through `brews` and `casks` before you run `bootstrap.sh` or `rebuild.sh` for the first time, and add anything you want to keep.
 
+Homebrew itself is pinned by `nix-homebrew` in `flake.lock`. If current casks
+fail with an unknown DSL method such as `command_wrapper`, run
+`nix flake update nix-homebrew` and rebuild; `brew update` alone cannot update
+the Nix-managed Homebrew implementation.
+
+CLI packages available in the pinned Nixpkgs release are managed by
+`home.packages` in `home.nix`; remaining tools and GUI apps are declared in
+`configuration.nix`. Nix package versions follow `flake.lock` and may be older
+than Homebrew versions. When migrating an existing Homebrew cask to Home Manager,
+build the Nix system first, then uninstall that cask **without `--zap`** before
+switching. In particular, zapping Claude Code removes its login and state files.
+
 **About `herdr`:** it's in the `brews` list.
 It's a real public Homebrew formula (`brew info herdr` finds it in homebrew-core, no tap needed), so it will install fine.
 If you don't use it, just remove it from `brews` in your copy.
