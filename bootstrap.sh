@@ -55,7 +55,7 @@ echo "==> Step 4: first darwin-rebuild switch (pinned to nix-darwin-26.05)"
 NIX_BIN="$(command -v nix)"
 # "mac" is the flake host label - if you renamed it, change it in flake.nix
 # and rebuild.sh too.
-sudo "$NIX_BIN" run github:nix-darwin/nix-darwin/nix-darwin-26.05#darwin-rebuild -- \
+sudo -H "$NIX_BIN" run github:nix-darwin/nix-darwin/nix-darwin-26.05#darwin-rebuild -- \
   switch --flake ~/.dotfiles#mac
 # If this still fails with "nix: command not found", open a new terminal
 # (Determinate adds nix to new shells' PATH) and re-run ./bootstrap.sh.
