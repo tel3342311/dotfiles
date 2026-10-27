@@ -23,6 +23,8 @@ in
     awscli2
     claude-code
     codex
+    gh
+    (callPackage ./pkgs/gh-axi.nix { })  # not in nixpkgs, see pkgs/gh-axi.nix
     # the font everything renders in
     nerd-fonts.hack
   ];

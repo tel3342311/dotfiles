@@ -44,6 +44,7 @@
     ];
     brews = [
       "herdr"
+      "skillshare"
       "steipete/tap/camsnap"
       "steipete/tap/gifgrep"
       "openclaw/tap/goplaces"
