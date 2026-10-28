@@ -61,12 +61,11 @@
     casks = [
       "betterdisplay"
       "db-browser-for-sqlite"
-      "diffmerge"
       "drawio"
       "ghostty"
-      "goplaces"
       "iterm2"
       "karabiner-elements"
+      "kdiff3"
       "kitty"
       "opensuperwhisper"
       "orbstack"
