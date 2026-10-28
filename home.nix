@@ -67,8 +67,20 @@ in
       co = "codex --full-auto";
       ag = "agy --dangerously-skip-permissions";
       vi = "nvim";
+      vim = "nvim";
+      ls = "eza --icons";
+      ll = "eza -lah --icons";
+      cat = "bat";
     };
   };
+
+  # Installed here because the aliases above need them. Aliases stay explicit so
+  # Home Manager does not add its own ls/ll/la/lt set.
+  programs.eza = {
+    enable = true;
+    enableZshIntegration = false;
+  };
+  programs.bat.enable = true;
 
   programs.starship = {
     enable = true;
