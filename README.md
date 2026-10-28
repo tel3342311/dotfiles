@@ -55,7 +55,7 @@ Change the host label or CPU architecture if needed, and read the Homebrew clean
 ./bootstrap.sh
 ```
 
-`bootstrap.sh` does four things, in order:
+`bootstrap.sh` does five things, in order:
 
 1. Installs Determinate Nix, if it isn't already installed.
 2. Symlinks this repo to `~/.dotfiles`.
@@ -63,6 +63,9 @@ Change the host label or CPU architecture if needed, and read the Homebrew clean
 3. Checks that your macOS username is in the `users` list in `flake.nix`, and stops with instructions if it isn't.
 4. Runs the first `darwin-rebuild switch`.
    It fetches the `darwin-rebuild` tool from the nix-darwin 26.05 release branch, then applies this repo's locked flake config.
+5. Runs `sync-skills.sh`, which sets up skillshare and pulls my AI skills from a private repo.
+   That needs `gh auth login` first, so on a new machine this step is skipped until you log in; then run `./sync-skills.sh` yourself.
+   On a machine that is already set up, `./sync-skills.sh` just pulls the latest skills.
 
 After that, `darwin-rebuild` exists and you're on the normal workflow below.
 

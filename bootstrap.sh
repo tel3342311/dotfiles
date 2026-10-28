@@ -48,4 +48,9 @@ sudo -H "$NIX_BIN" run github:nix-darwin/nix-darwin/nix-darwin-26.05#darwin-rebu
 # If this still fails with "nix: command not found", open a new terminal
 # (Determinate adds nix to new shells' PATH) and re-run ./bootstrap.sh.
 
+echo "==> Step 5: sync AI skills with skillshare"
+# The skills repo is private, so this needs `gh auth login` first. That login is
+# interactive, so a failure here is not fatal: log in, then run ./sync-skills.sh.
+"$DIR/sync-skills.sh" || echo "    Skipped. After gh auth login, run ./sync-skills.sh."
+
 echo "==> Done. Use ./rebuild.sh for future changes."
