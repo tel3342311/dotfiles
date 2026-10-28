@@ -43,6 +43,10 @@ in
       "https://gist.github.com".helper = [ "" "!gh auth git-credential" ];
     };
   };
+  programs.zoxide = {
+    enable = true;
+    options = [ "--cmd" "cd" ];  # replace cd itself, as the old .zshrc did
+  };
   fonts.fontconfig.enable = true;
   home.sessionVariables.EDITOR = "nvim";
 
