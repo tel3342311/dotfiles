@@ -27,6 +27,17 @@ in
     # the font everything renders in
     nerd-fonts.hack
   ] ++ builtins.attrValues (import ./pkgs { inherit lib callPackage; });  # tools not in nixpkgs
+  # Let gh answer git's credential prompts on every machine. Only the helper is
+  # managed here: no identity (name/email), and no second git or gh config file.
+  programs.git = {
+    enable = true;
+    package = null;  # keep the system git
+    signing.format = null;  # otherwise HM writes a gpg.program pointing into the Nix store
+    settings.credential = {
+      "https://github.com".helper = [ "" "!gh auth git-credential" ];
+      "https://gist.github.com".helper = [ "" "!gh auth git-credential" ];
+    };
+  };
   fonts.fontconfig.enable = true;
   home.sessionVariables.EDITOR = "nvim";
 
