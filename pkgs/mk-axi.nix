@@ -1,27 +1,44 @@
 # Builds one of kunchenguid's npm-only "*-axi" CLIs from its GitHub release tag.
-# pnpm_10 on purpose: the default pnpm 11.9 is killed in the macOS build sandbox.
-{ lib, stdenv, fetchFromGitHub, nodejs, pnpm_10, fetchPnpmDeps, pnpmConfigHook, makeWrapper }:
+# Pinned to pnpm_11: pnpm_10 is marked insecure in current Nixpkgs, and pnpm 11.9
+# was killed in the macOS build sandbox (11.27 builds fine).
+{ lib, stdenv, fetchFromGitHub, applyPatches, nodejs, pnpm_11, fetchPnpmDeps, pnpmConfigHook, makeWrapper }:
 
-{ pname, version, srcHash, depsHash, entry, description, build ? "pnpm exec tsc" }:
+{ pname, version, srcHash, depsHash, entry, description, build ? "pnpm exec tsc"
+# Packages whose pnpm trustPolicy check must be skipped; each one needs a stated reason at the call site.
+, trustPolicyExclude ? [ ]
+}:
 
 stdenv.mkDerivation (finalAttrs: {
   inherit pname version;
 
-  src = fetchFromGitHub {
-    owner = "kunchenguid";
-    repo = pname;
-    tag = "${pname}-v${version}";
-    hash = srcHash;
-  };
+  src =
+    let
+      upstream = fetchFromGitHub {
+        owner = "kunchenguid";
+        repo = pname;
+        tag = "${pname}-v${version}";
+        hash = srcHash;
+      };
+    in
+    if trustPolicyExclude == [ ] then upstream else applyPatches {
+      src = upstream;
+      # Shared by the dependency fetch and the build, so both see the same policy.
+      postPatch = ''
+        {
+          echo "trustPolicyExclude:"
+          ${lib.concatMapStringsSep "\n" (e: "echo \"  - '${e}'\"") trustPolicyExclude}
+        } >> pnpm-workspace.yaml
+      '';
+    };
 
   pnpmDeps = fetchPnpmDeps {
     inherit (finalAttrs) pname version src;
-    pnpm = pnpm_10;
+    pnpm = pnpm_11;
     fetcherVersion = 3;
     hash = depsHash;
   };
 
-  nativeBuildInputs = [ nodejs pnpm_10 pnpmConfigHook makeWrapper ];
+  nativeBuildInputs = [ nodejs pnpm_11 pnpmConfigHook makeWrapper ];
 
   buildPhase = ''
     runHook preBuild
