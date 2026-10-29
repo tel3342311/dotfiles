@@ -26,3 +26,8 @@ result-*
 home/.config/herdr/herdr.sock.agent
 home/.config/herdr/release-notes.json
 home/.config/herdr/session-snapshots/
+
+# herdr per-session runtime state, editor logs, and local settings backups
+home/.config/herdr/sessions/
+nvim.log
+*.bak
