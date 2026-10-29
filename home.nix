@@ -49,6 +49,7 @@ in
   };
   fonts.fontconfig.enable = true;
   home.sessionVariables.EDITOR = "nvim";
+  home.sessionPath = [ "$HOME/.local/bin" ];  # claude, pi, herdr and other self-installed CLIs
 
   programs.zsh = {
     enable = true;
@@ -59,6 +60,7 @@ in
     '';
     shellAliases = {
       ".." = "cd ..";
+      z = "cd";  # zoxide is initialised with --cmd cd, so z is not defined by it
       add = "git add .";
       push = "git push";
       pull = "git pull";
