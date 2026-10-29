@@ -530,6 +530,60 @@
                                 ]
                             },
                             {
+                                "type": "basic",
+                                "from": {
+                                    "key_code": "e"
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "left_arrow"
+                                    }
+                                ],
+                                "conditions": [
+                                    {
+                                        "identifiers": [
+                                            {
+                                                "vendor_id": 17235
+                                            }
+                                        ],
+                                        "type": "device_if"
+                                    },
+                                    {
+                                        "bundle_identifiers": [
+                                            "^com\\.google\\.Chrome$"
+                                        ],
+                                        "type": "frontmost_application_if"
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "basic",
+                                "from": {
+                                    "key_code": "f"
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "right_arrow"
+                                    }
+                                ],
+                                "conditions": [
+                                    {
+                                        "identifiers": [
+                                            {
+                                                "vendor_id": 17235
+                                            }
+                                        ],
+                                        "type": "device_if"
+                                    },
+                                    {
+                                        "bundle_identifiers": [
+                                            "^com\\.google\\.Chrome$"
+                                        ],
+                                        "type": "frontmost_application_if"
+                                    }
+                                ]
+                            },
+                            {
                                 "conditions": [
                                     {
                                         "identifiers": [
