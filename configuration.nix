@@ -7,6 +7,8 @@
   nixpkgs.config.allowUnfree = true;
   nixpkgs.hostPlatform = "aarch64-darwin"; # use x86_64-darwin for Intel CPU
 
+  environment.variables.CLAUDE_CODE_CERT_STORE = "bundled,system";
+
   system.primaryUser = user;
   users.users.${user} = {
     home = "/Users/${user}";
