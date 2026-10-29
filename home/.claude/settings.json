@@ -55,5 +55,6 @@
       "**Org-specific CLIs**: None configured",
       "routine under this repo's working directory only (scope = just this project)"
     ]
-  }
+  },
+  "skipDangerousModePermissionPrompt": true
 }
