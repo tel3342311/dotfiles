@@ -532,6 +532,60 @@
                             {
                                 "type": "basic",
                                 "from": {
+                                    "key_code": "c"
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "up_arrow"
+                                    }
+                                ],
+                                "conditions": [
+                                    {
+                                        "identifiers": [
+                                            {
+                                                "vendor_id": 17235
+                                            }
+                                        ],
+                                        "type": "device_if"
+                                    },
+                                    {
+                                        "bundle_identifiers": [
+                                            "^com\\.google\\.Chrome$"
+                                        ],
+                                        "type": "frontmost_application_if"
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "basic",
+                                "from": {
+                                    "key_code": "d"
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "down_arrow"
+                                    }
+                                ],
+                                "conditions": [
+                                    {
+                                        "identifiers": [
+                                            {
+                                                "vendor_id": 17235
+                                            }
+                                        ],
+                                        "type": "device_if"
+                                    },
+                                    {
+                                        "bundle_identifiers": [
+                                            "^com\\.google\\.Chrome$"
+                                        ],
+                                        "type": "frontmost_application_if"
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "basic",
+                                "from": {
                                     "key_code": "e"
                                 },
                                 "to": [
@@ -598,7 +652,8 @@
                                             "^dev\\.openab\\.connect$",
                                             "^com\\.amazon\\.kiro\\.crew$",
                                             "^com\\.mitchellh\\.ghostty$",
-                                            "^com\\.github\\.wez\\.wezterm$"
+                                            "^com\\.github\\.wez\\.wezterm$",
+                                            "^com\\.google\\.Chrome$"
                                         ],
                                         "type": "frontmost_application_unless"
                                     }
@@ -632,7 +687,8 @@
                                             "^dev\\.openab\\.connect$",
                                             "^com\\.amazon\\.kiro\\.crew$",
                                             "^com\\.mitchellh\\.ghostty$",
-                                            "^com\\.github\\.wez\\.wezterm$"
+                                            "^com\\.github\\.wez\\.wezterm$",
+                                            "^com\\.google\\.Chrome$"
                                         ],
                                         "type": "frontmost_application_unless"
                                     }
@@ -665,7 +721,8 @@
                                             "^dev\\.openab\\.connect$",
                                             "^com\\.amazon\\.kiro\\.crew$",
                                             "^com\\.mitchellh\\.ghostty$",
-                                            "^com\\.github\\.wez\\.wezterm$"
+                                            "^com\\.github\\.wez\\.wezterm$",
+                                            "^com\\.google\\.Chrome$"
                                         ],
                                         "type": "frontmost_application_unless"
                                     }
@@ -702,7 +759,8 @@
                                             "^dev\\.openab\\.connect$",
                                             "^com\\.amazon\\.kiro\\.crew$",
                                             "^com\\.mitchellh\\.ghostty$",
-                                            "^com\\.github\\.wez\\.wezterm$"
+                                            "^com\\.github\\.wez\\.wezterm$",
+                                            "^com\\.google\\.Chrome$"
                                         ],
                                         "type": "frontmost_application_unless"
                                     }
