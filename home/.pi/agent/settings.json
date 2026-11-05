@@ -19,6 +19,6 @@
   ],
   "lastChangelogVersion": "1.4.0",
   "deviceId": "0a2a449c-9803-47af-9b84-772ddf143710",
-  "defaultProvider": "openai",
-  "defaultModel": "gpt-5.5"
+  "defaultProvider": "antigravity-acp",
+  "defaultModel": "gemini-3.8-flash"
 }
