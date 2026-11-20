@@ -27,8 +27,9 @@ in
     # the font everything renders in
     nerd-fonts.hack
   ] ++ builtins.attrValues (import ./pkgs { inherit lib callPackage; });  # tools not in nixpkgs
-  # Shared git behaviour for every machine: the gh credential helper and kdiff3 as
-  # the diff/merge tool. No identity (name/email), and no second git or gh config file.
+  # Shared git behaviour for every machine: the gh credential helper, kdiff3 as
+  # the diff/merge tool, and linear history (pull rebases, merge only fast-forwards).
+  # No identity (name/email), and no second git or gh config file.
   programs.git = {
     enable = true;
     package = null;  # keep the system git
@@ -36,6 +37,8 @@ in
     settings = {
       diff.tool = "kdiff3";
       merge.tool = "kdiff3";
+      merge.ff = "only";
+      pull.rebase = true;
       mergetool.keepBackup = false;
     };
     settings.credential = {
