@@ -45,7 +45,13 @@
       "yakitrak/yakitrak"
     ];
     brews = [
+      "automake"
+      "bison"
+      "cmake"
       "herdr"
+      "libtool"
+      "node"  # pi and tasks-axi are npm globals under this prefix; zap removes node if unlisted
+      "re2c"
       "skillshare"
       "steipete/tap/camsnap"
       "steipete/tap/gifgrep"
@@ -59,6 +65,7 @@
       "steipete/tap/sag"
       "steipete/tap/songsee"
       "openclaw/tap/wacli"
+      "uv"
     ];
     casks = [
       "betterdisplay"

@@ -19,10 +19,38 @@
   },
   "enabledPlugins": {
     "tutti-view@local": true,
-    "mobile-mcp@mobile-mcp": true
+    "mobile-mcp@mobile-mcp": true,
+    "model-router@model-router": true,
+    "superpowers@superpowers-marketplace": true
+  },
+  "extraKnownMarketplaces": {
+    "claude-community": {
+      "source": {
+        "source": "github",
+        "repo": "anthropics/claude-plugins-community"
+      }
+    },
+    "model-router": {
+      "source": {
+        "source": "github",
+        "repo": "lalitkale/model-router"
+      }
+    },
+    "superpowers-marketplace": {
+      "source": {
+        "source": "github",
+        "repo": "obra/superpowers-marketplace"
+      }
+    }
+  },
+  "modelSettings": {
+    "claude-sonnet-5-5": {
+      "autoCompactWindow": 400000
+    }
   },
   "tui": "fullscreen",
   "theme": "dark-ansi",
+  "agentPushNotifEnabled": true,
   "autoMode": {
     "allow": [
       "$defaults",
@@ -55,6 +83,5 @@
       "**Org-specific CLIs**: None configured",
       "routine under this repo's working directory only (scope = just this project)"
     ]
-  },
-  "skipDangerousModePermissionPrompt": true
+  }
 }

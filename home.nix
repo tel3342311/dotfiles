@@ -52,6 +52,9 @@ in
   };
   fonts.fontconfig.enable = true;
   home.sessionVariables.EDITOR = "nvim";
+  # Agent shells (Claude Code, Codex, pi) replay a snapshot without zoxide's chpwd hook,
+  # so zoxide's doctor misfires on every cd there; interactive shells are unaffected.
+  home.sessionVariables._ZO_DOCTOR = "0";
   home.sessionPath = [ "$HOME/.local/bin" ];  # claude, pi, herdr and other self-installed CLIs
 
   programs.zsh = {

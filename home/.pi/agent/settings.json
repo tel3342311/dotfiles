@@ -17,8 +17,17 @@
     "npm:pi-agy",
     "npm:pi-antigravity-acp-provider"
   ],
-  "lastChangelogVersion": "1.4.0",
+  "lastChangelogVersion": "1.5.0",
   "deviceId": "0a2a449c-9803-47af-9b84-772ddf143710",
   "defaultProvider": "antigravity-acp",
-  "defaultModel": "gemini-3.8-flash"
+  "defaultModel": "gemini-3.8-flash",
+  "enabledModels": [
+    "antigravity-acp/gemini-3.8-flash",
+    "antigravity-acp/gemini-4-argon",
+    "antigravity/gemini-3.8-flash",
+    "xai/grok-4.7"
+  ],
+  "extensionChangelogVersions": {
+    "{\"source\":\"npm:pi-web-access@0.14.0\",\"scope\":\"user\"}": "0.14.0"
+  }
 }
