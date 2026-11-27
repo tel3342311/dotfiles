@@ -17,15 +17,16 @@
     "npm:pi-agy",
     "npm:pi-antigravity-acp-provider"
   ],
-  "lastChangelogVersion": "1.5.0",
+  "lastChangelogVersion": "1.6.1",
   "deviceId": "0a2a449c-9803-47af-9b84-772ddf143710",
   "defaultProvider": "antigravity-acp",
-  "defaultModel": "gemini-3.8-flash",
+  "defaultModel": "gemini-4-neon",
   "enabledModels": [
-    "antigravity-acp/gemini-3.8-flash",
-    "antigravity-acp/gemini-4-argon",
-    "antigravity/gemini-3.8-flash",
-    "xai/grok-4.7"
+    "xai/grok-4.7",
+    "antigravity-acp/gemini-4-neon",
+    "antigravity-acp/gemini-4-carbon",
+    "antigravity-acp/gemini-4-hydrogen",
+    "antigravity-acp/gemini-4-argon"
   ],
   "extensionChangelogVersions": {
     "{\"source\":\"npm:pi-web-access@0.14.0\",\"scope\":\"user\"}": "0.14.0"
